@@ -4,5 +4,5 @@ module "this" {
   env = "dev"
 
   vpc_cidr      = "10.0.0.0/16"
-  number_of_azs = 1
+  number_of_azs = 2
 }

@@ -7,13 +7,18 @@ resource "aws_iam_policy" "terraform_executor" {
       {
         Effect = "Allow"
         Action = [
+          "acm:*",
           "autoscaling:*",
+          "application-autoscaling:*",
+          "cloudwatch:*",
+          "elasticloadbalancing:*",
           "ec2:*",
-          "ecs:*",
           "ecr:*",
+          "ecs:*",
           "iam:*",
+          "logs:*",
+          "route53:*",
           "s3:*",
-          "codedeploy:*",
         ]
         Resource = ["*"]
       },
