@@ -63,6 +63,7 @@ jobs:
         id: plan
         run: |
           terraform plan -no-color -input=false
+          ls dummy
           echo "exitcode=$?" >> $GITHUB_OUTPUT
         continue-on-error: true
         working-directory: ${{ env.tf_actions_working_dir }}
