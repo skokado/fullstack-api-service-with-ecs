@@ -9,6 +9,7 @@ resource "aws_iam_policy" "terraform_executor" {
         Action = [
           "acm:*",
           "autoscaling:*",
+          "application-autoscaling:*",
           "cloudwatch:*",
           "elasticloadbalancing:*",
           "ec2:*",
