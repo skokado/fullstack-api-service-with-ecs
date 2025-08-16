@@ -48,6 +48,12 @@ resource "aws_lb_listener" "app_production" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app_0.arn
   }
+
+  lifecycle {
+    ignore_changes = [
+      default_action[0].target_group_arn,
+    ]
+  }
 }
 
 resource "aws_lb_listener" "app_test_traffic" {
@@ -60,6 +66,12 @@ resource "aws_lb_listener" "app_test_traffic" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app_1.arn
+  }
+
+  lifecycle {
+    ignore_changes = [
+      default_action[0].target_group_arn,
+    ]
   }
 }
 
