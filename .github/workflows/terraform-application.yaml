@@ -1,4 +1,4 @@
-name: Terraform (network)
+name: Terraform (application)
 
 # ref. https://github.com/hashicorp/setup-terraform
 
@@ -8,13 +8,13 @@ on:
       - main
       - dev
     paths:
-      - 'terraform/network/**'
+      - 'terraform/application/**'
   pull_request:
     branches:
       - main
       - dev
     paths:
-      - 'terraform/network/**'
+      - 'terraform/application/**'
       - '.github/workflows/terraform.yaml'
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
       - name: Set working directory
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.base.ref }}" == "main" ]]; then
-            echo "tf_actions_working_dir=terraform/network/envs/dev" >> $GITHUB_ENV
+            echo "tf_actions_working_dir=terraform/application/envs/dev" >> $GITHUB_ENV
           fi
 
       # TODO switch multiple roles for dev/stg and prod
