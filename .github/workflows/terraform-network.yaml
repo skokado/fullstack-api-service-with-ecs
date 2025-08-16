@@ -5,7 +5,6 @@ name: Terraform (network)
 on:
   push:
     branches:
-      - main
       - dev
     paths:
       - 'terraform/network/**'
