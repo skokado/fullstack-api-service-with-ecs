@@ -113,8 +113,8 @@ jobs:
           # available types:
           #   ref. https://github.com/docker/metadata-action?tab=readme-ov-file#global-expressions
           tags: |
-            type=raw
-            type=tag
+            type=sha
+            type=ref
 
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
