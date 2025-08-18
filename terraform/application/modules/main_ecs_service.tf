@@ -103,8 +103,8 @@ module "ecs_service_app" {
       advanced_configuration = {
         alternate_target_group_arn = aws_lb_target_group.app_1.arn
         role_arn                   = module.ecs_infrastructure_role_for_alb.iam_role_arn
-        production_listener_rule   = data.external.lb_listener_app_production_rule_arn.result.arn
-        test_listener_rule         = data.external.lb_listener_app_test_traffic_rule_arn.result.arn
+        production_listener_rule   = data.external.lb_listener_app_production_default_rule.result.arn
+        test_listener_rule         = data.external.lb_listener_app_test_traffic_default_rule.result.arn
       }
     }
   }
