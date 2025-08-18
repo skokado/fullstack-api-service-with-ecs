@@ -110,11 +110,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY_IMAGE }}
+          # available types:
+          #   ref. https://github.com/docker/metadata-action?tab=readme-ov-file#global-expressions
           tags: |
-            type=ref,event=branch
-            type=sha
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=raw
+            type=tag
 
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
