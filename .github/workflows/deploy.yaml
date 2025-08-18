@@ -53,6 +53,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY_IMAGE }}
 
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ matrix.platform }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ matrix.platform }}-buildx-
+
+
       - name: Build image and push by digest
         id: build
         uses: docker/build-push-action@v6
@@ -61,8 +70,8 @@ jobs:
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           target: runner
-          cache-from: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache,mode=max
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           outputs: type=image,push-by-digest=true,name-canonical=true
           push: true
           tags: ${{ env.REGISTRY_IMAGE }}
