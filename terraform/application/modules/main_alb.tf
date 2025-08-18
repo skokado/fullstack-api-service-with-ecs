@@ -76,14 +76,14 @@ resource "aws_lb_listener" "app_test_traffic" {
 }
 
 # LB リスナーのデフォルトルール ARN を Terraform で上手く取得する方法がないため、かなり強引な対処法
-data "external" "lb_listener_app_production_rule_arn" {
+data "external" "lb_listener_app_production_default_rule" {
   program = ["bash", "-c", <<EOF
 rule_arn=$(aws elbv2 describe-rules --listener-arn ${aws_lb_listener.app_production.arn} --query 'Rules[?IsDefault==`true`].RuleArn' --output text)
 echo "{\"arn\":\"$rule_arn\"}"
 EOF
   ]
 }
-data "external" "lb_listener_app_test_traffic_rule_arn" {
+data "external" "lb_listener_app_test_traffic_default_rule" {
   program = ["bash", "-c", <<EOF
 rule_arn=$(aws elbv2 describe-rules --listener-arn ${aws_lb_listener.app_test_traffic.arn} --query 'Rules[?IsDefault==`true`].RuleArn' --output text)
 echo "{\"arn\":\"$rule_arn\"}"
